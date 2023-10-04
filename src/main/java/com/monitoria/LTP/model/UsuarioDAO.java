@@ -1,3 +1,4 @@
+/*
 package com.monitoria.LTP.model;
 
 import java.util.ArrayList;
@@ -48,3 +49,4 @@ public class UsuarioDAO {
         return (ArrayList<Usuario>) DataBase.all();
     }
 }
+*/

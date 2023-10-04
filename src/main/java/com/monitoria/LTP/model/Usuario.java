@@ -1,25 +1,32 @@
 package com.monitoria.LTP.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Usuario {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String prontuario;
     private String turma;
     protected String email;
     
-    public Usuario(int id, String nome, String prontuario, String turma, String email) {
-        this.id = id;
+    public Usuario(String nome, String prontuario, String turma, String email) {
         this.nome = nome;
         this.prontuario = prontuario;
         this.turma = turma;
         this.email = email;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
