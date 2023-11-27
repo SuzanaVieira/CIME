@@ -2,8 +2,6 @@ package com.monitoria.LTP.controller;
 
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,13 +27,11 @@ public class MateriaController {
 
     @PostMapping("/cadastro/materia")
     public Materia criar(@RequestBody Materia novo) {
-       return materiaRepository.save(novo);
+        return materiaRepository.save(novo);
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public void deletar(@PathVariable ("id") Long id) {
+    @DeleteMapping("materia/deletar/{id}")
+    public void deletar(@PathVariable("id") Long id) {
         materiaRepository.deleteById(id);
-            }
-        }
-
-
+    }
+}

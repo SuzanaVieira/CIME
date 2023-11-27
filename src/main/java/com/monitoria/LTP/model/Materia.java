@@ -1,23 +1,34 @@
 package com.monitoria.LTP.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Materia {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String disciplina;
     private String cargaHoraria;
     private String professor;
+
+    public Materia(){
+        
+    }
     
-    public Materia(int id, String disciplina, String cargaHoraria, String professor) {
-        this.id = id;
+    public Materia(String disciplina, String cargaHoraria, String professor) {
         this.disciplina = disciplina;
         this.cargaHoraria = cargaHoraria;
         this.professor = professor;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

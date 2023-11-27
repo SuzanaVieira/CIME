@@ -2,9 +2,8 @@ package com.monitoria.LTP.controller;
 
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +19,31 @@ import com.monitoria.LTP.repository.UsuarioRepository;
 @CrossOrigin
 public class UsuarioController {
     @Autowired
-    UsuarioRepository usuariosRepository;
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/usuario")
     public List<Usuario> listarUsuarios() {
-        return (List<Usuario>) usuariosRepository.findAll();
+        return (List<Usuario>) usuarioRepository.findAll();
     }
 
     @PostMapping("/cadastro/usuario")
-    public Usuario criarUsuario(@RequestBody Usuario novo) {
-        return usuariosRepository.save(novo);
+    public String criarUsuario(@RequestBody Usuario novoUser) {
+        novoUser.setPassword(
+            passwordEncoder.encode(novoUser.getPassword())
+        );
+        Usuario usuarioCriado = usuarioRepository.save(novoUser);
+
+        if(usuarioCriado != null)
+            return "Usuário criado com sucesso!";        
+        
+        return "Erro ao criar usuário";
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("usuario/deletar/{id}")
     public void deletarUsuario(@PathVariable("id") Long id) {
-        usuariosRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 }
